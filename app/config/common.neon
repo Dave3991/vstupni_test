@@ -60,8 +60,5 @@ resource:
             paths: [%appDir%/controller]
             decorator:
             				inject: true
-decorator:
-    Symfony\Component\Console\Command\Command:
-        tags: [kdyby.console.command]
 
 
