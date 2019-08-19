@@ -8,37 +8,37 @@ use Doctrine\ORM\EntityManager;
 
 class DoctrineFactory
 {
-    /** @var \VstupniTest\Data\DataProvider\DatabaseParametersProvider  */
-    protected $databaseParametersProvider;
+    /** @var bool */
+    protected  $debugMode;
+    /** @var string[] */
+    protected  $pathsToEntityFiles;
+    /** @var string */
+    protected  $driver;
+    /** @var string */
+    protected  $password;
+    /** @var string */
+    protected  $dbName;
 
-    /** @var \VstupniTest\Data\DataProvider\ContainerParametersProvider  */
-    protected $containerParametersProvider;
-
-    public function __construct(
-        \VstupniTest\Data\DataProvider\DatabaseParametersProvider $databaseParametersProvider,
-        \VstupniTest\Data\DataProvider\ContainerParametersProvider $containerParametersProvider
-    )
+    /**
+     * DoctrineFactory constructor.
+     *
+     * @param bool     $debugMode
+     * @param string[] $pathsToEntityFiles
+     * @param string   $driver
+     * @param string   $password
+     * @param string   $dbName
+     */
+    public function __construct(bool $debugMode, array $pathsToEntityFiles, string $driver, string $password, string $dbName)
     {
-        $this->databaseParametersProvider = $databaseParametersProvider;
-        $this->containerParametersProvider = $containerParametersProvider;
+        $this->debugMode = $debugMode;
+        $this->pathsToEntityFiles = $pathsToEntityFiles;
+        $this->driver = $driver;
+        $this->password = $password;
+        $this->dbName = $dbName;
     }
 
-    public function getEntityManager(): \Doctrine\ORM\EntityManager
-    {
-        $isDevMode = $this->containerParametersProvider->getDebugMode();
-        $pathsToEntityFiles = [
-            $this->databaseParametersProvider->getPathToEntityFiles(),
-        ];
 
-        $driver = $this->databaseParametersProvider->getDriver();
-        $user = $this->databaseParametersProvider->getUser();
-        $password = $this->databaseParametersProvider->getPassword();
-        $dbname = $this->databaseParametersProvider->getDbName();
-
-        return $this->createEntityManager($isDevMode, $pathsToEntityFiles, $driver, $user, $password, $dbname);
-    }
-
-    protected function createEntityManager(bool $debugMode, array $pathsToEntityFiles, string $driver, string $user, string $password, string $dbName): \Doctrine\ORM\EntityManager
+    public function createEntityManager(bool $debugMode, array $pathsToEntityFiles, string $driver, string $user, string $password, string $dbName): \Doctrine\ORM\EntityManager
     {
         $dbParams = [
             'driver'   => $driver,

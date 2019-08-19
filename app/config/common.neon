@@ -31,8 +31,15 @@ services:
 	router: App\Router\RouterFactory::createRouter
 	containerParametersProvider: \VstupniTest\Data\DataProvider\ContainerParametersProvider
 	databaseParametersProvider: \VstupniTest\Data\DataProvider\DatabaseParametersProvider
-	doctrineFactory: \VstupniTest\Factory\DoctrineFactory
-
+	doctrineFactory: \VstupniTest\Factory\DoctrineFactory(%debugMode%,%database.pathToEntityFiles%,%database.driver%,%database.user%,%database.password%,%database.dbname%)
+	console.application:
+		class: Symfony\Component\Console\Application
+		setup:
+			# Configuration =================
+			- setName('My CLI')
+			- setVersion('1.0')
+			# Commands ======================
+			- add(\VstupniTest\App\Console\Commands\LoadPidCommand())
 
 extensions:
     api: Apitte\Core\DI\ApiExtension
@@ -53,3 +60,8 @@ resource:
             paths: [%appDir%/controller]
             decorator:
             				inject: true
+decorator:
+    Symfony\Component\Console\Command\Command:
+        tags: [kdyby.console.command]
+
+

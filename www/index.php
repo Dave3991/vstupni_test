@@ -7,8 +7,10 @@ use App\Bootstrap;
 use Nette\Application\Application as UIApplication;
 
 require __DIR__ . '/../vendor/autoload.php';
-
-$isApi = substr($_SERVER['REQUEST_URI'], 0, 4) === '/api';
+$isApi = false;
+if($_SERVER['REQUEST_URI'] !== null) {
+    $isApi = substr($_SERVER['REQUEST_URI'], 0, 4) === '/api';
+}
 $container = Bootstrap::boot()->createContainer();
 
 if ($isApi) {

@@ -37,7 +37,9 @@
 		"apitte/core": "v0.6.0",
 		"apitte/openapi": "v0.6.0",
 		"apitte/debug": "v0.6.0",
-		"apitte/presenter": "v0.6.0"
+		"apitte/presenter": "v0.6.0",
+
+        "symfony/console": "4.3.3"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0"
