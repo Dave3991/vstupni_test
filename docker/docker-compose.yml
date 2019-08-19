@@ -1,0 +1,33 @@
+version: '3.6'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+#      - ./nginx/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ../../:/var/www
+    links:
+      - php
+    depends_on:
+      - php
+      - mysql
+
+  php:
+    volumes:
+       - ../../:/var/www
+    image: php:7.3-fpm
+
+  mysql:
+      image: mysql:8.0.17
+      ports:
+          - "33060:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: lopata
+      volumes:
+          - mysql_vstupni_test:/var/lib/mysql
+
+
+volumes:
+  mysql_vstupni_test:

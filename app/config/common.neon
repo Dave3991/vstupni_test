@@ -1,0 +1,55 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+    database:
+    	driver: 'pdo_mysql'
+    	user: 'root'
+    	password: 'lopata'
+    	pathToEntityFiles: %appDir%/Entity/database
+    	dbname: 'vstupni_test'
+    	dsn: 'mysql:host=mysql;dbname=vstupni_test'
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+		Apitte: Apitte\*\Presenter\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	- Apitte\Presenter\ApiPresenter
+#	- App\Model\UserManager
+#	- App\Forms\FormFactory
+#	- App\Forms\SignInFormFactory
+#	- App\Forms\SignUpFormFactory
+	router: App\Router\RouterFactory::createRouter
+	containerParametersProvider: \VstupniTest\Data\DataProvider\ContainerParametersProvider
+	databaseParametersProvider: \VstupniTest\Data\DataProvider\DatabaseParametersProvider
+	doctrineFactory: \VstupniTest\Factory\DoctrineFactory
+
+
+extensions:
+    api: Apitte\Core\DI\ApiExtension
+    resource: Contributte\DI\Extension\ResourceExtension
+
+api:
+    debug: %debugMode%
+    catchException: false # Sets if exception should be catched and transformed into response or rethrown to output (debug only)
+    plugins:
+        Apitte\Core\DI\Plugin\CoreMappingPlugin:
+        Apitte\Debug\DI\DebugPlugin:
+        Apitte\OpenApi\DI\OpenApiPlugin:
+
+resource:
+    resources:
+        VstupniTest\App\Controller\:
+            # where the classes are located
+            paths: [%appDir%/controller]
+            decorator:
+            				inject: true
