@@ -7,6 +7,7 @@ $container = $container = App\Bootstrap::boot()->createContainer();
 
 // Run symfony application.
 $app = $container->getByType(\Symfony\Component\Console\Application::class);
+\Doctrine\ORM\Tools\Console\ConsoleRunner::addCommands($app);
 
 // Ensure exit codes
 exit($app->run());

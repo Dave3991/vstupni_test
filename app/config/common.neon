@@ -7,7 +7,7 @@ parameters:
     	driver: 'pdo_mysql'
     	user: 'root'
     	password: 'lopata'
-    	pathToEntityFiles: %appDir%/Entity/database
+    	pathToEntityFiles: [%appDir%/Entity/database]
     	dbname: 'vstupni_test'
     	dsn: 'mysql:host=mysql;dbname=vstupni_test'
 
@@ -38,6 +38,7 @@ services:
 			# Configuration =================
 			- setName('My CLI')
 			- setVersion('1.0')
+		#	- setHelperSet(\Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet)
 			# Commands ======================
 			- add(\VstupniTest\App\Console\Commands\LoadPidCommand())
 

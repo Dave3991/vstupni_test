@@ -14,6 +14,8 @@ class DoctrineFactory
     protected  $pathsToEntityFiles;
     /** @var string */
     protected  $driver;
+    /** @var string  */
+    protected $user;
     /** @var string */
     protected  $password;
     /** @var string */
@@ -21,20 +23,20 @@ class DoctrineFactory
 
     /**
      * DoctrineFactory constructor.
-     *
-     * @param bool     $debugMode
-     * @param string[] $pathsToEntityFiles
-     * @param string   $driver
-     * @param string   $password
-     * @param string   $dbName
-     */
-    public function __construct(bool $debugMode, array $pathsToEntityFiles, string $driver, string $password, string $dbName)
+     **/
+    public function __construct(bool $debugMode, array $pathsToEntityFiles, string $driver,string $user, string $password, string $dbName)
     {
         $this->debugMode = $debugMode;
         $this->pathsToEntityFiles = $pathsToEntityFiles;
         $this->driver = $driver;
+        $this->user = $user;
         $this->password = $password;
         $this->dbName = $dbName;
+    }
+
+    public function createEntityManagerBySettings(): \Doctrine\ORM\EntityManager
+    {
+        return $this->createEntityManager($this->debugMode,$this->pathsToEntityFiles,$this->driver,$this->user,$this->password,$this->dbName);
     }
 
 
