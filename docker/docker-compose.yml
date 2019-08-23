@@ -17,10 +17,10 @@ services:
   php:
     volumes:
        - ../../:/var/www
-    image: php:7.3-fpm
+    image: phpdockerio/php73-fpm
 
   mysql:
-      image: mysql:8.0.17
+      image: mysql:5.7.27
       ports:
           - "33060:3306"
       environment:

@@ -11,3 +11,15 @@ Installation
 3. inside docker (docker_web_1) run `composer update`
 4. Now you should have working web on 127.0.0.1:8080
 5. To run console: `php ./bin/console.php`
+
+How to
+------------
+generate entities from db
+probably you will have to install driver for you db
+example for mysql
+```bash
+apt-update
+apt install php7.3-mysql
+```
+
+`php bin/console.php orm:convert-mapping --namespace="VstupniTest\App\Entity\Database\\" --from-database annotation ./app/Entity/database/ `

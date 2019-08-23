@@ -9,6 +9,7 @@ parameters:
     	password: 'lopata'
     	pathToEntityFiles: [%appDir%/Entity/database]
     	dbname: 'vstupni_test'
+    	host: 'mysql'
     	dsn: 'mysql:host=mysql;dbname=vstupni_test'
 
 application:
@@ -31,7 +32,7 @@ services:
 	router: App\Router\RouterFactory::createRouter
 	containerParametersProvider: \VstupniTest\Data\DataProvider\ContainerParametersProvider
 	databaseParametersProvider: \VstupniTest\Data\DataProvider\DatabaseParametersProvider
-	doctrineFactory: \VstupniTest\Factory\DoctrineFactory(%debugMode%,%database.pathToEntityFiles%,%database.driver%,%database.user%,%database.password%,%database.dbname%)
+	doctrineFactory: \VstupniTest\Factory\DoctrineFactory(%debugMode%,%database.pathToEntityFiles%,%database.driver%,%database.user%,%database.password%,%database.dbname%,%database.host%)
 	console.application:
 		class: Symfony\Component\Console\Application
 		setup:

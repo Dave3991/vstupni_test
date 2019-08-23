@@ -20,11 +20,13 @@ class DoctrineFactory
     protected  $password;
     /** @var string */
     protected  $dbName;
+    /** @var string */
+    protected $host;
 
     /**
      * DoctrineFactory constructor.
      **/
-    public function __construct(bool $debugMode, array $pathsToEntityFiles, string $driver,string $user, string $password, string $dbName)
+    public function __construct(bool $debugMode, array $pathsToEntityFiles, string $driver,string $user, string $password, string $dbName, string $host)
     {
         $this->debugMode = $debugMode;
         $this->pathsToEntityFiles = $pathsToEntityFiles;
@@ -32,21 +34,23 @@ class DoctrineFactory
         $this->user = $user;
         $this->password = $password;
         $this->dbName = $dbName;
+        $this->host = $host;
     }
 
     public function createEntityManagerBySettings(): \Doctrine\ORM\EntityManager
     {
-        return $this->createEntityManager($this->debugMode,$this->pathsToEntityFiles,$this->driver,$this->user,$this->password,$this->dbName);
+        return $this->createEntityManager($this->debugMode,$this->pathsToEntityFiles,$this->driver,$this->user,$this->password,$this->dbName, $this->host);
     }
 
 
-    public function createEntityManager(bool $debugMode, array $pathsToEntityFiles, string $driver, string $user, string $password, string $dbName): \Doctrine\ORM\EntityManager
+    public function createEntityManager(bool $debugMode, array $pathsToEntityFiles, string $driver, string $user, string $password, string $dbName, string $host): \Doctrine\ORM\EntityManager
     {
         $dbParams = [
             'driver'   => $driver,
             'user'     => $user,
             'password' => $password,
             'dbname'   => $dbName,
+            'host'     => $host
         ];
 
         $config = Setup::createAnnotationMetadataConfiguration($pathsToEntityFiles, $debugMode);
