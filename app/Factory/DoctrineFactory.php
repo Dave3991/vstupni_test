@@ -52,8 +52,7 @@ class DoctrineFactory
             'dbname'   => $dbName,
             'host'     => $host
         ];
-
-        $config = Setup::createAnnotationMetadataConfiguration($pathsToEntityFiles, $debugMode);
+        $config = Setup::createAnnotationMetadataConfiguration($pathsToEntityFiles, $debugMode,null, null, false);
         return EntityManager::create($dbParams, $config);
     }
 

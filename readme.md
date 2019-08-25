@@ -25,3 +25,6 @@ apt install php7.3-mysql
 then run command inside container for generating doctrine entities:
 `php bin/console.php orm:convert-mapping --namespace="" --from-database annotation ./app/Entity/Database/`
 
+then run this for creating database schema stuff
+
+`php ./bin/console.php orm:schema-tool:update --force`

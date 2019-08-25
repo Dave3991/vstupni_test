@@ -29,4 +29,14 @@ class ContainerParametersProvider
         return $this->getContainerParameters()['debugMode'];
     }
 
+    public function getAppDirPath(): string
+    {
+        return $this->getContainerParameters()['appDir'];
+    }
+
+    public function getWwwDirPath(): string
+    {
+        return $this->getContainerParameters()['wwwDir'];
+    }
+
 }

@@ -7,8 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OpeningHours
  *
- * @ORM\Table(name="opening_hours", indexes={@ORM\Index(name="FK_opening_hours_points_of_sale", columns={"point_of_sale_id"})})
  * @ORM\Entity
+ * @ORM\Table(name="opening_hours", indexes={@ORM\Index(name="FK_opening_hours_points_of_sale", columns={"point_of_sale_id"})})
+ *
  */
 class OpeningHours
 {
@@ -51,6 +52,87 @@ class OpeningHours
      * })
      */
     private $pointOfSale;
+
+    /**
+     * @return int
+     */
+    public function getOpeningHoursId(): int
+    {
+        return $this->openingHoursId;
+    }
+
+    /**
+     * @param int $openingHoursId
+     */
+    public function setOpeningHoursId(int $openingHoursId): void
+    {
+        $this->openingHoursId = $openingHoursId;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getOpenFrom(): \DateTime
+    {
+        return $this->openFrom;
+    }
+
+    /**
+     * @param \DateTime $openFrom
+     */
+    public function setOpenFrom(\DateTime $openFrom): void
+    {
+        $this->openFrom = $openFrom;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getOpenTo(): \DateTime
+    {
+        return $this->openTo;
+    }
+
+    /**
+     * @param \DateTime $openTo
+     */
+    public function setOpenTo(\DateTime $openTo): void
+    {
+        $this->openTo = $openTo;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDayId(): bool
+    {
+        return $this->dayId;
+    }
+
+    /**
+     * @param bool $dayId
+     */
+    public function setDayId(bool $dayId): void
+    {
+        $this->dayId = $dayId;
+    }
+
+    /**
+     * @return \PointsOfSale
+     */
+    public function getPointOfSaleId(): \PointsOfSale
+    {
+        return $this->pointOfSale;
+    }
+
+    /**
+     * @param \PointsOfSale $pointOfSale
+     */
+    public function setPointOfSaleId(\PointsOfSale $pointOfSale): void
+    {
+        $this->pointOfSale = $pointOfSale;
+    }
+
 
 
 }

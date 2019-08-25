@@ -7,7 +7,7 @@ parameters:
     	driver: 'pdo_mysql'
     	user: 'root'
     	password: 'lopata'
-    	pathToEntityFiles: [%appDir%/Entity/database]
+    	pathToEntityFiles: [%appDir%/Entity/Database]
     	dbname: 'vstupni_test'
     	host: 'mysql'
     	dsn: 'mysql:host=mysql;dbname=vstupni_test'
@@ -64,3 +64,9 @@ resource:
             				inject: true
 
 
+tracy:
+    showLocation: true
+    maxLen: 2048
+    maxDepth: 8
+    logSeverity: E_ALL
+    strictMode: true
