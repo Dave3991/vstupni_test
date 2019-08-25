@@ -20,11 +20,17 @@ services:
     image: phpdockerio/php73-fpm
 
   mysql:
-      image: mysql:5.7.27
+      image: mysql:8.0.17
+      command:
+          - echo "ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'lopata';" | mysql --user=root --password=lopata'
+          #'--default-authentication-plugin=mysql_native_password'
       ports:
           - "33060:3306"
       environment:
-          MYSQL_ROOT_PASSWORD: lopata
+#         MYSQL_DATABASE: 'db'
+         MYSQL_USER: 'user'
+         MYSQL_PASSWORD: 'lopata'
+         MYSQL_ROOT_PASSWORD: 'lopata'
       volumes:
           - mysql_vstupni_test:/var/lib/mysql
 

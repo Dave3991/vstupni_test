@@ -22,4 +22,6 @@ apt-update
 apt install php7.3-mysql
 ```
 
-`php bin/console.php orm:convert-mapping --namespace="VstupniTest\App\Entity\Database\\" --from-database annotation ./app/Entity/database/ `
+then run command inside container for generating doctrine entities:
+`php bin/console.php orm:convert-mapping --namespace="" --from-database annotation ./app/Entity/Database/`
+
