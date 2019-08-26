@@ -37,9 +37,9 @@ class OpeningHours
     private $openTo;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="day_id", type="boolean", nullable=false)
+     * @ORM\Column(name="day_id", type="smallint", nullable=false)
      */
     private $dayId;
 
@@ -102,17 +102,17 @@ class OpeningHours
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isDayId(): bool
+    public function getDayId(): int
     {
         return $this->dayId;
     }
 
     /**
-     * @param bool $dayId
+     * @param int $dayId
      */
-    public function setDayId(bool $dayId): void
+    public function setDayId(int $dayId): void
     {
         $this->dayId = $dayId;
     }

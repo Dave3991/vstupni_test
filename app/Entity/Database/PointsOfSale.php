@@ -71,6 +71,12 @@ class PointsOfSale
     private $payMethods;
 
     /**
+     * Vzdalenost k IP adrese
+     * @var float
+     */
+    private $distance;
+
+    /**
      * @return string
      */
     public function getPointOfSaleId(): string
@@ -139,11 +145,11 @@ class PointsOfSale
      */
     public function getLat(): float
     {
-        return $this->lat;
+        return (float)$this->lat;
     }
 
     /**
-     * @param string $lat
+     * @param float $lat
      */
     public function setLat(float $lat): void
     {
@@ -155,7 +161,7 @@ class PointsOfSale
      */
     public function getLon(): float
     {
-        return $this->lon;
+        return (float)$this->lon;
     }
 
     /**
@@ -197,6 +203,23 @@ class PointsOfSale
     {
         $this->payMethods = $payMethods;
     }
+
+    /**
+     * @return float
+     */
+    public function getDistance(): float
+    {
+        return $this->distance;
+    }
+
+    /**
+     * @param float $distance
+     */
+    public function setDistance(float $distance): void
+    {
+        $this->distance = $distance;
+    }
+
 
 
 }

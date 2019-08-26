@@ -50,11 +50,36 @@ class LoadPidCommand extends Command
             $pointOfSale->setLon($row['lon']);
             $pointOfSale->setServices($row['services']);
             $pointOfSale->setPayMethods($row['payMethods']);
+
+            foreach ($row['openingHours'] as $openingHoursRow) {
+                for ($i = $openingHoursRow['from']; $i <= $openingHoursRow['to']; $i++) {
+                    $this->saveOpeningHours($openingHoursRow['hours'], $pointOfSale,$i);
+                }
+            }
+
+
             $this->entityManager->persist($pointOfSale);
         }
         $this->entityManager->flush();
 
 
         return 0;
+    }
+
+    private function saveOpeningHours(string $openingHours, $pointOfSale, int $dayId): void
+    {
+        $explodeByCommaArray = \explode(',', $openingHours);
+        foreach ($explodeByCommaArray as $explodeByComma)
+        {
+            $openingHours = new \OpeningHours();
+            $openingHours->setPointOfSaleId($pointOfSale);
+            $openingHours->setDayId($dayId);
+            $time = \explode('-', $explodeByComma);
+            $from = new \DateTime($time[0]);
+            $to = new \DateTime($time[1]);
+            $openingHours->setOpenFrom($from);
+            $openingHours->setOpenTo($to);
+            $this->entityManager->persist($openingHours);
+        }
     }
 }

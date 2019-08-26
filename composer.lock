@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9af6acd0d0e437ab1d148a6d504688b0",
+    "content-hash": "eb8e98d4517aefb347e130a461239555",
     "packages": [
         {
             "name": "apitte/core",
@@ -650,7 +650,7 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "1.6.x-dev",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
@@ -807,12 +807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "9ff47e738575ab208f3ab4031412c58eb676ed1e"
+                "reference": "f0aca96d98cd85b532a5fc9f2d733d3f1aade541"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9ff47e738575ab208f3ab4031412c58eb676ed1e",
-                "reference": "9ff47e738575ab208f3ab4031412c58eb676ed1e",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/f0aca96d98cd85b532a5fc9f2d733d3f1aade541",
+                "reference": "f0aca96d98cd85b532a5fc9f2d733d3f1aade541",
                 "shasum": ""
             },
             "require": {
@@ -891,7 +891,7 @@
                 "sqlserver",
                 "sqlsrv"
             ],
-            "time": "2019-08-08T14:07:27+00:00"
+            "time": "2019-08-20T21:15:13+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -1397,6 +1397,122 @@
             "time": "2018-12-12T20:24:29+00:00"
         },
         {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/407b0cb880ace85c9b63c5f9551db498cb2d50ba",
+                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.4",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
+                "psr/log": "^1.0"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.3-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2018-04-22T15:46:56+00:00"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "17d36ed176c998839582c739ce0753381598edf0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/17d36ed176c998839582c739ce0753381598edf0",
+                "reference": "17d36ed176c998839582c739ce0753381598edf0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.27 || ^7.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "time": "2019-07-02T14:54:06+00:00"
+        },
+        {
             "name": "guzzlehttp/psr7",
             "version": "1.x-dev",
             "source": {
@@ -1900,12 +2016,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "570020312863db90d2f63d48093ce85ce8a316f0"
+                "reference": "a75737bde54c04d06ec4e723a48aa7816363c86f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/570020312863db90d2f63d48093ce85ce8a316f0",
-                "reference": "570020312863db90d2f63d48093ce85ce8a316f0",
+                "url": "https://api.github.com/repos/nette/di/zipball/a75737bde54c04d06ec4e723a48aa7816363c86f",
+                "reference": "a75737bde54c04d06ec4e723a48aa7816363c86f",
                 "shasum": ""
             },
             "require": {
@@ -1965,7 +2081,7 @@
                 "nette",
                 "static"
             ],
-            "time": "2019-08-07T12:11:33+00:00"
+            "time": "2019-08-19T16:07:56+00:00"
         },
         {
             "name": "nette/finder",
@@ -2035,12 +2151,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/forms.git",
-                "reference": "9270dace1bc8cb126d5dc5790d7807837d2d5a49"
+                "reference": "2ca348aa51b626acd6bbfcc3e60f5ed3a52ed6a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/forms/zipball/9270dace1bc8cb126d5dc5790d7807837d2d5a49",
-                "reference": "9270dace1bc8cb126d5dc5790d7807837d2d5a49",
+                "url": "https://api.github.com/repos/nette/forms/zipball/2ca348aa51b626acd6bbfcc3e60f5ed3a52ed6a9",
+                "reference": "2ca348aa51b626acd6bbfcc3e60f5ed3a52ed6a9",
                 "shasum": ""
             },
             "require": {
@@ -2095,7 +2211,7 @@
                 "nette",
                 "validation"
             ],
-            "time": "2019-08-06T00:38:56+00:00"
+            "time": "2019-08-19T15:39:45+00:00"
         },
         {
             "name": "nette/http",
@@ -3136,12 +3252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "5327348240527c29097ee1612dddcfbfdeec75d7"
+                "reference": "ea7263d6b6d5f798b56a45a5b8d686725f2719a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/5327348240527c29097ee1612dddcfbfdeec75d7",
-                "reference": "5327348240527c29097ee1612dddcfbfdeec75d7",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ea7263d6b6d5f798b56a45a5b8d686725f2719a3",
+                "reference": "ea7263d6b6d5f798b56a45a5b8d686725f2719a3",
                 "shasum": ""
             },
             "require": {
@@ -3186,7 +3302,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-08-14T13:27:41+00:00"
+            "time": "2019-08-20T14:44:19+00:00"
         },
         {
             "name": "tracy/tracy",
@@ -3194,12 +3310,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "1db4afca9e233434bbbca4070ddc5c41f816e731"
+                "reference": "61180c13da58ba3be2c8fa01cc54ab65b1219ff8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/1db4afca9e233434bbbca4070ddc5c41f816e731",
-                "reference": "1db4afca9e233434bbbca4070ddc5c41f816e731",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/61180c13da58ba3be2c8fa01cc54ab65b1219ff8",
+                "reference": "61180c13da58ba3be2c8fa01cc54ab65b1219ff8",
                 "shasum": ""
             },
             "require": {
@@ -3253,7 +3369,7 @@
                 "nette",
                 "profiler"
             ],
-            "time": "2019-08-05T11:35:10+00:00"
+            "time": "2019-08-19T16:11:37+00:00"
         }
     ],
     "packages-dev": [

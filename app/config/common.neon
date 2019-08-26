@@ -42,6 +42,10 @@ services:
 		#	- setHelperSet(\Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet)
 			# Commands ======================
 			- add(\VstupniTest\App\Console\Commands\LoadPidCommand())
+	ipGeoLocation: \VstupniTest\Factory\IpGeoLocation
+	guzzleFactory: \VstupniTest\Factory\GuzzleFactory
+	distance: \VstupniTest\App\Model\Distance
+	cache: VstupniTest\Factory\Cache
 
 extensions:
     api: Apitte\Core\DI\ApiExtension

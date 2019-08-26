@@ -8,4 +8,9 @@ use Apitte\Core\Annotation\Controller\GroupPath;
  */
 abstract class BaseV1Controller extends BaseController
 {
+    public function getIpAddress(): string
+    {
+        $ip=$_SERVER['REMOTE_ADDR'];
+        return $ip;
+    }
 }
