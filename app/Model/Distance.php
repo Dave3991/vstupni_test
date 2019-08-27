@@ -17,11 +17,11 @@ class Distance
         $this->entityManager = $doctrineFactory->createEntityManagerBySettings();
     }
 
-    public function getPointOfSaleCollection(): \Doctrine\Common\Collections\ArrayCollection
+    public function getPointOfSales(): \VstupniTest\App\Entity\Collection\PointOfSaleCollection
     {
         $pointOfSaleRepository = $this->entityManager->getRepository(\PointsOfSale::class);
-        $products = $pointOfSaleRepository->findAll();
-        return new \Doctrine\Common\Collections\ArrayCollection($products);
+        $pointOfSales = $pointOfSaleRepository->findAll();
+        return new \VstupniTest\App\Entity\Collection\PointOfSaleCollection($pointOfSales);
     }
 
     public function getSordetByDistance(string $ipAddress):  \Doctrine\Common\Collections\ArrayCollection
@@ -30,22 +30,13 @@ class Distance
         $decodedResponse = $this->decodeJson($ipGeoResponse);
         $ipAddressLat = $this->parseLatFromResponse($decodedResponse);
         $ipAddressLong = $this->parseLongFromResponse($decodedResponse);
-        $collection = $this->getPointOfSaleCollection();
-        $iterator = $collection->getIterator();
-        /** @var \PointsOfSale $pointOfSale */
-        $pointOfSale = $iterator->current();
-
-        $posLat = $pointOfSale->getLat();
-        $posLong = $pointOfSale->getLon();
-
-        $distance = $this->computeDistance($ipAddressLat,$ipAddressLong,$posLat,$posLong);
-        $pointOfSale->setDistance($distance);
-        $iterator->uasort(function ($a, $b) {
-            return ($a->getDistance() < $b->getDistance()) ? -1 : 1;
-        });
-         $collection = new \Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
-         dump($collection);
-         return  $collection;
+        $pointOfSales = $this->getPointOfSales();
+        $pointOfSales->setDistance($ipAddressLat,$ipAddressLong);
+        $pointOfSales->getSortedByDistance();
+        $pointOfSales->getOnlyOpened();
+        $iterator = $pointOfSales->getIterator();
+        $collection = new \Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return  $collection;
     //   return $this->computeDistance($ipAddressLat,$ipAddressLong,$pointsOfSale->getLat(),$pointsOfSale->getLon());
 
     }
@@ -65,17 +56,5 @@ class Distance
         return (float)$decodedResponse['latitude'];
     }
 
-    public function computeDistance(float $lat1, float $lon1, float $lat2, float $lon2): float
-    {
-        if (($lat1 == $lat2) && ($lon1 == $lon2)) {
-            return 0.0;
-        } else {
-            $theta = $lon1 - $lon2;
-            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            $kilometers = $dist * 60 * 1.1515 * 1.609344;
-            return $kilometers;
-        }
-    }
+
 }

@@ -28,3 +28,7 @@ then run command inside container for generating doctrine entities:
 then run this for creating database schema stuff
 
 `php ./bin/console.php orm:schema-tool:update --force`
+
+
+To validate annotations in entity classes
+`php ./bin/console.php  doctrine:schema:validate`

@@ -3,6 +3,8 @@
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * PointsOfSale
@@ -17,7 +19,9 @@ class PointsOfSale
      * @var string
      *
      * @ORM\Column(name="point_of_sale_id", type="string", length=50, nullable=false)
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Id
+     *
      */
     private $pointOfSaleId;
 
@@ -75,6 +79,18 @@ class PointsOfSale
      * @var float
      */
     private $distance;
+
+    /**
+     * One Point of Sale has many openingHours
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="OpeningHours",mappedBy="pointOfSaleId")
+     */
+    private $openingHours;
+
+    public function __construct()
+    {
+        $this->openingHours = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -220,6 +236,13 @@ class PointsOfSale
         $this->distance = $distance;
     }
 
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOpeningHours(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->openingHours;
+    }
 
 
 }

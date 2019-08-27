@@ -3,6 +3,9 @@
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * OpeningHours
@@ -45,13 +48,10 @@ class OpeningHours
 
     /**
      * @var \PointsOfSale
-     *
-     * @ORM\ManyToOne(targetEntity="PointsOfSale")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="point_of_sale_id", referencedColumnName="point_of_sale_id")
-     * })
+     * @ManyToOne(targetEntity="PointsOfSale", inversedBy="openingHours")
+     * @ORM\JoinColumn(name="point_of_sale_id", referencedColumnName="point_of_sale_id")
      */
-    private $pointOfSale;
+    private $pointOfSaleId;
 
     /**
      * @return int
@@ -130,7 +130,7 @@ class OpeningHours
      */
     public function setPointOfSaleId(\PointsOfSale $pointOfSale): void
     {
-        $this->pointOfSale = $pointOfSale;
+        $this->pointOfSaleId = $pointOfSale;
     }
 
 
