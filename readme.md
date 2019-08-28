@@ -23,6 +23,7 @@ apt install php7.3-mysql
 ```
 
 then run command inside container for generating doctrine entities:
+
 `php bin/console.php orm:convert-mapping --namespace="" --from-database annotation ./app/Entity/Database/`
 
 then run this for creating database schema stuff
@@ -31,4 +32,13 @@ then run this for creating database schema stuff
 
 
 To validate annotations in entity classes
+
 `php ./bin/console.php  doctrine:schema:validate`
+
+
+To run unit tests
+`vendor/bin/tester ./tests/`
+
+To run phpStan
+
+`vendor/bin/phpstan analyse -l7 -c ./tests/phpstan/phpstan.neon ./app`

@@ -45,7 +45,8 @@
         "guzzlehttp/guzzle": "6.3.3"
 	},
 	"require-dev": {
-		"nette/tester": "^2.0"
+		"nette/tester": "^2.0",
+        "phpstan/phpstan": "0.11.*"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]

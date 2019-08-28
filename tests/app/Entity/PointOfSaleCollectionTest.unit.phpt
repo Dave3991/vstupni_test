@@ -16,7 +16,7 @@ class PointOfSaleCollectionTest extends \Tester\TestCase
 
     public function setUp()
     {
-        $openingHours = new \Doctrine\Common\Collections\Collection();
+        $openingHours = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pointOfSales =
             [
                 0 => new \PointsOfSale('0','type01','pos01','adressa01',50.2106,15.3002,1253376,3,null,$openingHours),
