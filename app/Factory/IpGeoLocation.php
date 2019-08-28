@@ -28,7 +28,7 @@ class IpGeoLocation
      * @throws \GuzzleHttp\Exception\GuzzleException
      *  //curl 'https://api.ipgeolocation.io/ipgeo?apiKey=API_KEY&ip=1.1.1.1'
      */
-    public function getLocationByIpGeoLocation(string $ipAddress): string
+    public function getLocationByIpGeoLocation(string $ipAddress): \VstupniTest\App\Entity\IpGeoLocation
     {
         $cachedValue = $this->cache->load($ipAddress);
         if($cachedValue !== null)
@@ -44,8 +44,9 @@ class IpGeoLocation
                     ],
             ]);
         $reponse =  $request->getBody()->getContents();
-        $this->cache->save($ipAddress,$reponse);
-        return $reponse;
+        $ipGeoLocation = new \VstupniTest\App\Entity\IpGeoLocation($reponse);
+        $this->cache->save($ipAddress,$ipGeoLocation);
+        return $ipGeoLocation;
     }
 
 

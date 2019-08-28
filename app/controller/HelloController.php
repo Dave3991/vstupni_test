@@ -15,13 +15,13 @@ final class HelloController extends BaseV1Controller
     /** @var \VstupniTest\Factory\IpGeoLocation  */
     private $ipGeoLocation;
 
-    /** @var \App\Model\Distance */
-    private $distance;
+    /** @var \VstupniTest\App\Factory\PointOfSaleFactory */
+    private $pointOfSaleFactory;
 
-    public function __construct(\VstupniTest\Factory\IpGeoLocation $ipGeoLocation,\VstupniTest\App\Model\Distance $distance)
+    public function __construct(\VstupniTest\Factory\IpGeoLocation $ipGeoLocation,\VstupniTest\App\Factory\PointOfSaleFactory $pointOfSaleFactory)
     {
         $this->ipGeoLocation = $ipGeoLocation;
-        $this->distance = $distance;
+        $this->pointOfSaleFactory = $pointOfSaleFactory;
     }
 
     /**
@@ -68,13 +68,40 @@ final class HelloController extends BaseV1Controller
     }
 
     /**
-     * @Path("/sorted")
+     * @Path("/distance")
      * @Method("GET")
      */
-    public function sortedCollection()
+    public function sortedByDistance(ApiRequest $request, ApiResponse $response)
     {
         $ipAddress = '185.32.182.6';
-        $collection = $this->distance->getSordetByDistance($ipAddress);
-        return dump($collection,true);
+        $pointOfSalesCollection = $this->pointOfSaleFactory->getPointOfSalesCollectionSettedDistance($ipAddress);
+        $sortedByDistance = $pointOfSalesCollection->getSortedByDistance();
+        return $response->writeJsonBody($sortedByDistance->getJson());
+
+    }
+    /**
+     * @Path("/open")
+     * @Method("GET")
+     */
+    public function onlyOpen(ApiRequest $request, ApiResponse $response)
+    {
+        $dateTime = new \DateTime('now');
+        $pointOfSalesCollection = $this->pointOfSaleFactory->getPointOfSalesCollection();
+        $onlyOpened = $pointOfSalesCollection->getOnlyOpened($dateTime);
+        return $response->writeJsonBody($onlyOpened->getJson());
+    }
+
+    /**
+     * @Path("/open-distance")
+     * @Method("GET")
+     */
+    public function onlyOpenAndSortedByDistance(ApiRequest $request, ApiResponse $response)
+    {
+        $ipAddress = '185.32.182.6';
+        $dateTime = new \DateTime('now');
+        $pointOfSalesCollection = $this->pointOfSaleFactory->getPointOfSalesCollectionSettedDistance($ipAddress);
+        $sortedByDistance = $pointOfSalesCollection->getSortedByDistance();
+        $sortedyByDistanceOnlyOpened = $sortedByDistance->getOnlyOpened($dateTime);
+        return $response->writeJsonBody($sortedyByDistanceOnlyOpened->getJson());
     }
 }

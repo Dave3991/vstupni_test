@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\OneToMany;
  * @ORM\Table(name="points_of_sale")
  *
  */
-class PointsOfSale
+class PointsOfSale implements JsonSerializable
 {
     /**
      * @var string
@@ -76,7 +76,7 @@ class PointsOfSale
 
     /**
      * Vzdalenost k IP adrese
-     * @var float
+     * @var ?float
      */
     private $distance;
 
@@ -87,10 +87,34 @@ class PointsOfSale
      */
     private $openingHours;
 
-    public function __construct()
+
+    /**
+    * PointsOfSale constructor.
+    *
+    * @param string $pointOfSaleId
+    * @param string $type
+    * @param string $name
+    * @param string $address
+    * @param float $lat
+    * @param float $lon
+    * @param int $services
+    * @param int $payMethods
+    * @param ?float $distance
+    * @param \Doctrine\Common\Collections\Collection $openingHours
+    */public function __construct(string $pointOfSaleId, string $type, string $name, string $address, float $lat, float $lon, int $services, int $payMethods, ?float $distance, \Doctrine\Common\Collections\Collection $openingHours)
     {
-        $this->openingHours = new ArrayCollection();
+        $this->pointOfSaleId = $pointOfSaleId;
+        $this->type = $type;
+        $this->name = $name;
+        $this->address = $address;
+        $this->lat = $lat;
+        $this->lon = $lon;
+        $this->services = $services;
+        $this->payMethods = $payMethods;
+        $this->distance = $distance;
+        $this->openingHours = $openingHours;
     }
+
 
     /**
      * @return string
@@ -223,7 +247,7 @@ class PointsOfSale
     /**
      * @return float
      */
-    public function getDistance(): float
+    public function getDistance(): ?float
     {
         return $this->distance;
     }
@@ -242,6 +266,20 @@ class PointsOfSale
     public function getOpeningHours(): \Doctrine\Common\Collections\Collection
     {
         return $this->openingHours;
+    }
+
+    public function jsonSerialize()
+    {
+        $objectVars =  \get_object_vars($this);
+        $openingHoursCollection = $this->getOpeningHours();
+        $openFromOpenTo = [];
+        /** @var \OpeningHours $openingHours */
+        foreach ($openingHoursCollection as $openingHours)
+        {
+            $openFromOpenTo[] = $openingHours->jsonSerialize();
+        }
+        $objectVars['openingHours'] = $openFromOpenTo;
+        return $objectVars;
     }
 
 

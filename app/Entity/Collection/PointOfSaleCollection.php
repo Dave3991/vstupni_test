@@ -6,7 +6,7 @@ namespace VstupniTest\App\Entity\Collection;
 
 class PointOfSaleCollection extends \ArrayObject
 {
-    /** @param \PointsOfSale $value */
+     /** @param \PointsOfSale $value */
     public function append($value)
     {
         parent::append($value);
@@ -36,16 +36,39 @@ class PointOfSaleCollection extends \ArrayObject
         return new static(\iterator_to_array($iterator));
     }
 
-    public function getOnlyOpened(): PointOfSaleCollection
+    /**
+     * @param \DateTime $date - den pro ktery overujeme od kdy do kdy maji otevreno
+     *
+     * @return \VstupniTest\App\Entity\Collection\PointOfSaleCollection
+     */
+    public function getOnlyOpened(\DateTime $date): PointOfSaleCollection
     {
         $onlyOpened = new self();
         /** @var \PointsOfSale $poinOfSale */
         foreach ($this as $poinOfSale)
         {
            $openingHoursCollection = $poinOfSale->getOpeningHours();
-           dump(iterator_to_array($openingHoursCollection->getIterator()));
-           exit;
+           /** @var \OpeningHours $openHoursForDay */
+            foreach ($openingHoursCollection as $openHoursForDay)
+           {
+               $openHoursForDay->setComputeDate($date);
+               if (($date >= $openHoursForDay->getOpenFrom($date)) && ($date <= $openHoursForDay->getOpenTo($date))){
+                   $onlyOpened->append($poinOfSale);
+               }
+           }
         }
+        return $onlyOpened;
+    }
+
+    public function getJson(): array
+    {
+        $jsonArray = [];
+        /** @var \PointsOfSale $poinOfSale */
+        foreach ($this as $poinOfSale)
+        {
+            $jsonArray[] = $poinOfSale->jsonSerialize();
+        }
+        return $jsonArray;
     }
 
     private function computeDistance(float $lat1, float $lon1, float $lat2, float $lon2): float

@@ -44,8 +44,8 @@ services:
 			- add(\VstupniTest\App\Console\Commands\LoadPidCommand())
 	ipGeoLocation: \VstupniTest\Factory\IpGeoLocation
 	guzzleFactory: \VstupniTest\Factory\GuzzleFactory
-	distance: \VstupniTest\App\Model\Distance
-	cache: VstupniTest\Factory\Cache
+	PointOfSaleFactory: \VstupniTest\App\Factory\PointOfSaleFactory
+	cache: VstupniTest\Factory\Cache(%tempDir%)
 
 extensions:
     api: Apitte\Core\DI\ApiExtension
