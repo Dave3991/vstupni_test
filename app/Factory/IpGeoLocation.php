@@ -12,7 +12,7 @@ class IpGeoLocation
     /** @var \GuzzleHttp\Client */
     protected $guzzleClient;
 
-    /** @var \VstupniTest\Factory\Cache  */
+    /** @var \Nette\Caching\Cache  */
     protected $cache;
 
     public function __construct(GuzzleFactory $guzzleFactory, Cache $cache)
@@ -23,9 +23,6 @@ class IpGeoLocation
 
     /**
      * @param string $ipAddress
-     *
-     * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
      *  //curl 'https://api.ipgeolocation.io/ipgeo?apiKey=API_KEY&ip=1.1.1.1'
      */
     public function getLocationByIpGeoLocation(string $ipAddress): \VstupniTest\App\Entity\IpGeoLocation

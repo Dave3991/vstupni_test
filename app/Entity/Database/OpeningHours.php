@@ -84,13 +84,13 @@ class OpeningHours implements JsonSerializable
     }
 
     /**
-     * @param $date ve ktery den chceme vedet od kdy je otevreno
+     * $date ve ktery den chceme vedet od kdy je otevreno
      * @return \DateTime
      */
     public function getOpenFrom(\DateTime $date): \DateTime
     {
         $day = $this->getDayId();
-        $dayofweek = $date->format('w');
+        $dayofweek = (int)$date->format('w');// w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
         $result = new DateTime('now');
         $result->setTimestamp(strtotime(($day - $dayofweek).' day', $date->getTimestamp()));
         $this->openFrom->setDate((int)$result->format('Y'),(int)$result->format('m'),(int)$result->format('d'));
@@ -106,13 +106,13 @@ class OpeningHours implements JsonSerializable
     }
 
     /**
-     * @param $date ve ktery den chceme vedet do kdy je otevreno
+     * $date ve ktery den chceme vedet do kdy je otevreno
      * @return \DateTime
      */
     public function getOpenTo(\DateTime $date): \DateTime
     {
         $day = $this->getDayId();
-        $dayofweek = $date->format('w');
+        $dayofweek = (int)$date->format('w'); // w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
         $result = new DateTime('now');
         $result->setTimestamp(strtotime(($day - $dayofweek).' day', $date->getTimestamp()));
         $this->openTo->setDate((int)$result->format('Y'),(int)$result->format('m'),(int)$result->format('d'));
@@ -152,9 +152,9 @@ class OpeningHours implements JsonSerializable
     }
 
     /**
-     * @param \PointsOfSale $pointOfSale
+     * @param string $pointOfSale
      */
-    public function setPointOfSaleId(\PointsOfSale $pointOfSale): void
+    public function setPointOfSaleId(string $pointOfSale): void
     {
         $this->pointOfSaleId = $pointOfSale;
     }

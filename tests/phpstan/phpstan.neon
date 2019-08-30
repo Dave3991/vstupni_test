@@ -1,2 +1,5 @@
 parameters:
     bootstrap: %currentWorkingDirectory%/app/Bootstrap.php
+
+    autoload_directories:
+        - %currentWorkingDirectory%/app/

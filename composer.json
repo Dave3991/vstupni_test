@@ -46,7 +46,9 @@
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",
-        "phpstan/phpstan-shim": "0.11.*"
+        "phpstan/phpstan-shim": "0.11.*",
+        "phpstan/phpstan-nette": "0.11.*",
+        "phpstan/extension-installer": "1.0.*"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
