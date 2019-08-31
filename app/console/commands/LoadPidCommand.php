@@ -41,22 +41,13 @@ class LoadPidCommand extends Command
         $fileContent = file_get_contents($filePath);
         $decodedJson = \json_decode($fileContent,true);
         foreach ($decodedJson as $row) {
-            $pointOfSale = new \PointsOfSale();
-            $pointOfSale->setPointOfSaleId($row['id']);
-            $pointOfSale->setType($row['type']);
-            $pointOfSale->setName($row['name']);
-            $pointOfSale->setAddress($row['address']);
-            $pointOfSale->setLat($row['lat']);
-            $pointOfSale->setLon($row['lon']);
-            $pointOfSale->setServices($row['services']);
-            $pointOfSale->setPayMethods($row['payMethods']);
+            $pointOfSale = new \PointsOfSale($row['id'],$row['type'],$row['name'],$row['address'],$row['lat'],$row['lon'],$row['services'],$row['payMethods']);
 
             foreach ($row['openingHours'] as $openingHoursRow) {
                 for ($i = $openingHoursRow['from']; $i <= $openingHoursRow['to']; $i++) {
                     $this->saveOpeningHours($openingHoursRow['hours'], $pointOfSale,$i);
                 }
             }
-
 
             $this->entityManager->persist($pointOfSale);
         }
@@ -66,19 +57,17 @@ class LoadPidCommand extends Command
         return 0;
     }
 
-    private function saveOpeningHours(string $openingHours, $pointOfSale, int $dayId): void
+    private function saveOpeningHours(string $openingHours,\PointsOfSale $pointOfSale, int $dayId): void
     {
         $explodeByCommaArray = \explode(',', $openingHours);
-        foreach ($explodeByCommaArray as $explodeByComma)
+        foreach ($explodeByCommaArray as $key => $explodeByComma)
         {
-            $openingHours = new \OpeningHours();
-            $openingHours->setPointOfSaleId($pointOfSale);
-            $openingHours->setDayId($dayId);
             $time = \explode('-', $explodeByComma);
             $from = new \DateTime($time[0]);
             $to = new \DateTime($time[1]);
             $openingHours->setOpenFrom($from);
             $openingHours->setOpenTo($to);
+            $openingHours = new \OpeningHours($key,$from,$to,$dayId,$pointOfSale->getPointOfSaleId());
             $this->entityManager->persist($openingHours);
         }
     }

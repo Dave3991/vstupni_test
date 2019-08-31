@@ -101,7 +101,7 @@ class PointsOfSale implements JsonSerializable
     * @param int $payMethods
     * @param ?float $distance
     * @param \Doctrine\Common\Collections\Collection $openingHours
-    */public function __construct(string $pointOfSaleId, string $type, string $name, string $address, float $lat, float $lon, int $services, int $payMethods, ?float $distance, \Doctrine\Common\Collections\Collection $openingHours)
+    */public function __construct(string $pointOfSaleId, string $type, string $name, string $address, float $lat, float $lon, int $services, int $payMethods, ?float $distance, ?\Doctrine\Common\Collections\Collection $openingHours)
     {
         $this->pointOfSaleId = $pointOfSaleId;
         $this->type = $type;
