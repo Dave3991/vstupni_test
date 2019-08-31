@@ -55,9 +55,9 @@ class OpeningHours implements JsonSerializable
 
     /**
      * datum pro ktere pocitame zda je otevreno nebo ne
-     * @var \DateTime
+     * @var ?\DateTime
      */
-    private $computeDate;
+    private $computeDate = null;
 
     /**
      * OpeningHours constructor.
@@ -106,8 +106,12 @@ class OpeningHours implements JsonSerializable
      * $date ve ktery den chceme vedet od kdy je otevreno
      * @return \DateTime
      */
-    public function getOpenFrom(\DateTime $date): ?\DateTime
+    public function getOpenFrom(?\DateTime $date = null): ?\DateTime
     {
+        if($date === null)
+        {
+            return $this->openFrom;
+        }
         $day = $this->getDayId();
         $dayofweek = (int)$date->format('w');// w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
         //pokud tato entita neudrzuje informaci o dnu v tydnu o ktery se zajimame vracime null
@@ -132,8 +136,12 @@ class OpeningHours implements JsonSerializable
      * $date ve ktery den chceme vedet do kdy je otevreno
      * @return \DateTime
      */
-    public function getOpenTo(\DateTime $date): ?\DateTime
+    public function getOpenTo(?\DateTime $date = null): ?\DateTime
     {
+        if($date === null)
+        {
+            return $this->openTo;
+        }
         $day = $this->getDayId();
         $dayofweek = (int)$date->format('w');// w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
         //pokud tato entita neudrzuje informaci o dnu v tydnu o ktery se zajimame vracime null
@@ -187,15 +195,10 @@ class OpeningHours implements JsonSerializable
 
     public function jsonSerialize()
     {
-        $date = new \DateTime('now');
-        if($this->computeDate !== null)
-        {
-            $date = $this->computeDate;
-        }
         return
         [
-            'openFrom' => $this->getOpenFrom($date),
-            'openTo' => $this->getOpenTo($date),
+            'openFrom' => $this->getOpenFrom($this->computeDate),
+            'openTo' => $this->getOpenTo($this->computeDate),
         ];
     }
 

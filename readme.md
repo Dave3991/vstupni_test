@@ -35,6 +35,9 @@ To validate annotations in entity classes
 
 `php ./bin/console.php  doctrine:schema:validate`
 
+To load point of sales to db:
+
+`php ./bin/console.php load:pid`
 
 To run unit tests
 `vendor/bin/tester ./tests/ -c ./tests/unit/php.ini `
