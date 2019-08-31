@@ -4,7 +4,7 @@
 namespace VstupniTest\App\Entity;
 
 
-class IpGeoLocation
+class IpGeoLocation implements \JsonSerializable
 {
     private $contentFromApi;
 
@@ -27,5 +27,11 @@ class IpGeoLocation
     {
         return \json_decode($contentFromApi,true);
     }
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
 
 }

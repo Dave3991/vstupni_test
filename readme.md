@@ -37,7 +37,7 @@ To validate annotations in entity classes
 
 
 To run unit tests
-`vendor/bin/tester ./tests/`
+`vendor/bin/tester ./tests/ -c ./tests/unit/php.ini `
 
 To run phpStan
 

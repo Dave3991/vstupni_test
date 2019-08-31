@@ -60,12 +60,31 @@ class OpeningHours implements JsonSerializable
     private $computeDate;
 
     /**
+     * OpeningHours constructor.
+     *
+     * @param int       $openingHoursId
+     * @param \DateTime $openFrom
+     * @param \DateTime $openTo
+     * @param int       $dayId
+     * @param string    $pointOfSaleId
+     */
+    public function __construct(int $openingHoursId, \DateTime $openFrom, \DateTime $openTo, int $dayId, string $pointOfSaleId)
+    {
+        $this->openingHoursId = $openingHoursId;
+        $this->openFrom = $openFrom;
+        $this->openTo = $openTo;
+        $this->dayId = $dayId;
+        $this->pointOfSaleId = $pointOfSaleId;
+    }
+
+    /**
      * @param \DateTime $computeDate
      */
     public function setComputeDate(\DateTime $computeDate): void
     {
         $this->computeDate = $computeDate;
     }
+
 
     /**
      * @return int

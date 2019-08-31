@@ -61,10 +61,11 @@ final class HelloController extends BaseV1Controller
      * @Path("/ip-geo")
      * @Method("GET")
      */
-    public function responseFromIpGeo()
+    public function responseFromIpGeo(ApiRequest $request, ApiResponse $response)
     {
         $ipAddress = '185.32.182.6';
-        return $this->ipGeoLocation->getLocationByIpGeoLocation($ipAddress);
+        $ipGeolocation = $this->ipGeoLocation->getLocationByIpGeoLocation($ipAddress);
+        return $response->writeJsonBody($ipGeolocation->jsonSerialize());
     }
 
     /**
