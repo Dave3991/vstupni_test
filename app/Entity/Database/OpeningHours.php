@@ -106,13 +106,17 @@ class OpeningHours implements JsonSerializable
      * $date ve ktery den chceme vedet od kdy je otevreno
      * @return \DateTime
      */
-    public function getOpenFrom(\DateTime $date): \DateTime
+    public function getOpenFrom(\DateTime $date): ?\DateTime
     {
         $day = $this->getDayId();
         $dayofweek = (int)$date->format('w');// w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
-        $result = new DateTime('now');
-        $result->setTimestamp(strtotime(($day - $dayofweek).' day', $date->getTimestamp()));
-        $this->openFrom->setDate((int)$result->format('Y'),(int)$result->format('m'),(int)$result->format('d'));
+        //pokud tato entita neudrzuje informaci o dnu v tydnu o ktery se zajimame vracime null
+        if($day !== $dayofweek)
+        {
+            return null;
+        }
+        //v opacnem pripade nastavujeme datum ktere nas zajima abychom nevraci 1970-01-01
+        $this->openFrom->setDate((int)$date->format('Y'),(int)$date->format('m'),(int)$date->format('d'));
         return $this->openFrom;
     }
 
@@ -128,13 +132,16 @@ class OpeningHours implements JsonSerializable
      * $date ve ktery den chceme vedet do kdy je otevreno
      * @return \DateTime
      */
-    public function getOpenTo(\DateTime $date): \DateTime
+    public function getOpenTo(\DateTime $date): ?\DateTime
     {
         $day = $this->getDayId();
-        $dayofweek = (int)$date->format('w'); // w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
-        $result = new DateTime('now');
-        $result->setTimestamp(strtotime(($day - $dayofweek).' day', $date->getTimestamp()));
-        $this->openTo->setDate((int)$result->format('Y'),(int)$result->format('m'),(int)$result->format('d'));
+        $dayofweek = (int)$date->format('w');// w = 0 (for Sunday) through 6 (for Saturday), N = 1 (for Monday) through 7 (for Sunday)
+        //pokud tato entita neudrzuje informaci o dnu v tydnu o ktery se zajimame vracime null
+        if($day !== $dayofweek)
+        {
+            return null;
+        }
+        $this->openTo->setDate((int)$date->format('Y'),(int)$date->format('m'),(int)$date->format('d'));
         return $this->openTo;
     }
 

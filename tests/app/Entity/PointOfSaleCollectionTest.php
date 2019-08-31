@@ -61,7 +61,6 @@ class PointOfSaleCollectionTest extends \Tester\TestCase
         $poinOfSaleCollection->setDistance(50.51450,16.01190);
         $poinOfSaleCollection = $poinOfSaleCollection->getSortedByDistance();
         $nearestPoS = $poinOfSaleCollection->offsetGet(0);
-        //$poinOfSaleCollection->getOnlyOpened(new \DateTime())
         Assert::equal($this->pointOfSales[0],$nearestPoS);
 
     }
